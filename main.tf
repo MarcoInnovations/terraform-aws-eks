@@ -13,9 +13,6 @@ module "eks" {
   worker_group_count                         = "1"
   worker_additional_security_group_ids       = ["${aws_security_group.all_worker_mgmt.id}"]
   cluster_version                            = "${var.cluster_version}"
-
-  # cluster_endpoint_private_access            = "${var.cluster_endpoint_private_access}"
-  # cluster_endpoint_public_access             = "${var.cluster_endpoint_public_access}"
 }
 
 resource "aws_security_group" "all_worker_mgmt" {
