@@ -34,7 +34,7 @@ locals {
       type = "daemonset"
     },
     {
-      name = "kube-dns"   # Accommodate kubernetes 1.10: dns is called 'kube-dns' in 1.11+, dns is called 'coredns'
+      name = "coredns"    # Accommodate kubernetes 1.10: dns is called 'kube-dns' in 1.11+, dns is called 'coredns'
       type = "deployment"
     },
     {
