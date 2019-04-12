@@ -59,6 +59,14 @@ variable "worker_node_instance_type" {
   default = "t3.small"
 }
 
+variable "worker_node_instance_type_a" {
+  default = "t3.small"
+}
+
+variable "worker_node_instance_type_b" {
+  default = "t3.small"
+}
+
 variable "aws_authenticator_env_variables" {
   description = "A map of environment variables to use in the eks kubeconfig for aws authenticator"
   type        = "map"
@@ -83,7 +91,7 @@ variable "enable_pod_autoscaling" {
 
 variable "cluster_version" {
   description = "Version of k8s to use (eks version is derived from here)"
-  default     = "1.12"
+  default     = "1.11"
 }
 
 variable "protect_cluster_from_scale_in" {
