@@ -61,3 +61,7 @@ variable "allowed_worker_ssh_cidrs" {
 variable "install_helm" {
   default = true
 }
+
+variable "worker_group_count" {
+  default = "1"
+}

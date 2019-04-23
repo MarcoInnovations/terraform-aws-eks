@@ -88,33 +88,35 @@ variable "allowed_worker_ssh_cidrs" {
 }
 
 variable "worker_node_sysops_min" {
-  default = {}
+  default = 1
 }
 
 variable "worker_node_sysops_max" {
-  default = {}
+  default = 1
 }
 
 variable "worker_node_sysops_desired" {
-  default = {}
+  default = 1
 }
 
 variable "worker_node_sysops_instance" {
-  default = {}
+  default = "t3.medium"
 }
 
 variable "worker_node_app_min" {
-  default = {}
+  default = 1
 }
 
 variable "worker_node_app_max" {
-  default = {}
+  default = 1
 }
 
 variable "worker_node_app_desired" {
-  default = {}
+  default = 1
 }
 
 variable "worker_node_app_instance" {
-  default = {}
+  default = "t3.medium"
 }
+
+variable "worker_group_count" {}
