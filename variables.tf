@@ -31,32 +31,17 @@ variable "no_proxy" {
   default     = ""
 }
 
-variable "key_name" {
+variable "key_name_ops" {
+  description = "Key pair to use to access the instance created by the ASG/LC"
+}
+
+variable "key_name_app" {
   description = "Key pair to use to access the instance created by the ASG/LC"
 }
 
 variable "outputs_directory" {
   description = "The local folder path to store output files. Must end with '/' ."
   default     = "./output/"
-}
-
-variable "max_worker_nodes" {
-  description = "Maximum amount of worker nodes to spin up"
-  default     = "6"
-}
-
-variable "desired_worker_nodes" {
-  description = "Desired amount of worker nodes (needs to be => then minimum worker nodes)"
-  default     = "1"
-}
-
-variable "min_worker_nodes" {
-  description = "Minimum amount of worker nodes (needs to be <= then desired worker nodes)."
-  default     = "1"
-}
-
-variable "worker_node_instance_type" {
-  default = "t3.small"
 }
 
 variable "aws_authenticator_env_variables" {
@@ -102,7 +87,8 @@ variable "allowed_worker_ssh_cidrs" {
   default     = []
 }
 
-variable "worker_group_count" {
-  description = "Amount of worker groups to create ( eache needs to be defined within the workergroup )"
-  default     = "2"
+variable "worker_groups" {
+  type        = "list"
+  description = "blah"
+  default     = []
 }

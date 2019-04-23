@@ -1,32 +1,7 @@
 locals {
-  worker_groups = [
-    {
-      name                  = "worker_group_a"
-      kubelet_extra_args    = "--node-labels=eks_worker_group=a"
-      asg_desired_capacity  = 2
-      asg_max_size          = 5
-      asg_min_size          = 2
-      instance_type         = "t3.micro"
-      key_name              = "${var.key_name}"                                       # The key name that should be used for the instances in the autoscaling group
-      pre_userdata          = "${data.template_file.http_proxy_workergroup.rendered}" # userdata to pre-append to the default userdata.
-      autoscaling_enabled   = "${var.enable_cluster_autoscaling}"
-      protect_from_scale_in = "${var.protect_cluster_from_scale_in}"
-      subnets               = "${join(",", var.private_subnets)}"                     # A comma delimited string of subnets to place the worker nodes in. i.e. subnet-123,subnet-456,subnet-789
-    },
-    {
-      name                  = "worker_group_b"
-      kubelet_extra_args    = "--node-labels=eks_worker_group=b"
-      asg_desired_capacity  = 1
-      asg_max_size          = 3
-      asg_min_size          = 1
-      instance_type         = "t3.small"
-      key_name              = "${var.key_name}"                                       # The key name that should be used for the instances in the autoscaling group
-      pre_userdata          = "${data.template_file.http_proxy_workergroup.rendered}" # userdata to pre-append to the default userdata.
-      autoscaling_enabled   = "${var.enable_cluster_autoscaling}"
-      protect_from_scale_in = "${var.protect_cluster_from_scale_in}"
-      subnets               = "${join(",", var.private_subnets)}"                     # A comma delimited string of subnets to place the worker nodes in. i.e. subnet-123,subnet-456,subnet-789
-    },
-  ]
+  worker_group_defaults = {}
+
+  worker_groups_merged = "${merge(local.worker_group_defaults, var.worker_groups)}"
 
   horizontal_pod_autoscaler_defaults = {}
 
