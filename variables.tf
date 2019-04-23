@@ -101,3 +101,8 @@ variable "allowed_worker_ssh_cidrs" {
   description = "List of CIDR ranges to allow SSH access into worker nodes"
   default     = []
 }
+
+variable "worker_group_count" {
+  description = "Amount of worker groups to create ( eache needs to be defined within the workergroup )"
+  default     = "2"
+}

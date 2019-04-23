@@ -1,12 +1,11 @@
 provider "aws" {
   region  = "${var.region}"
   profile = "${var.aws_profile}"
-  version = "~> 2.5.0"
+  version = "~> 2.6.0"
 }
 
 module "eks" {
-  source = "../../"
-
+  source                          = "../../"
   region                          = "${var.region}"
   vpc_id                          = "${var.vpc_id}"
   private_subnets                 = "${var.private_subnets}"
