@@ -87,8 +87,34 @@ variable "allowed_worker_ssh_cidrs" {
   default     = []
 }
 
-variable "worker_groups" {
-  type        = "list"
-  description = "blah"
-  default     = []
+variable "worker_node_sysops_min" {
+  default = {}
+}
+
+variable "worker_node_sysops_max" {
+  default = {}
+}
+
+variable "worker_node_sysops_desired" {
+  default = {}
+}
+
+variable "worker_node_sysops_instance" {
+  default = {}
+}
+
+variable "worker_node_app_min" {
+  default = {}
+}
+
+variable "worker_node_app_max" {
+  default = {}
+}
+
+variable "worker_node_app_desired" {
+  default = {}
+}
+
+variable "worker_node_app_instance" {
+  default = {}
 }
