@@ -21,13 +21,12 @@ resource "aws_security_group" "all_worker_mgmt" {
 }
 
 resource "aws_security_group_rule" "allow_ssh" {
-  count       = "${length(var.allowed_worker_ssh_cidrs) != 0 ? 1 : 0}"
-  type        = "ingress"
-  from_port   = 22
-  to_port     = 22
-  protocol    = "tcp"
-  cidr_blocks = ["${var.allowed_worker_ssh_cidrs}"]
-
+  count             = "${length(var.allowed_worker_ssh_cidrs) != 0 ? 1 : 0}"
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  cidr_blocks       = ["${var.allowed_worker_ssh_cidrs}"]
   security_group_id = "${aws_security_group.all_worker_mgmt.id}"
 }
 
