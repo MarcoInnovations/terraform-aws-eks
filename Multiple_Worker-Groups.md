@@ -4,7 +4,7 @@
 When providing multiple workgroups manually in the locals.tf file and the needed variable values in a variable file, the terraform EKS module will build out the desired infrastructure.
 
 ## Problem
-Each worker group needs a set of specific settings and a set of mandatory defaults.  Currently the version of Terraform (v0.11.x) does not allow programatical iteration over a list or map of settings to inject the mandatory defaults into the user specified information.  Nor would we be able to verify if all needed information to build nodes is available in order to validate the build.
+Each worker group needs a set of specific settings and a set of mandatory defaults.  Currently the version of Terraform (v0.11.13) does not allow programatical iteration over a list or map of settings to inject the mandatory defaults into the user specified information.  Nor would we be able to verify if all needed information to build nodes is available in order to validate the build.
 Sidestepping and performing this in Python or Bash would be an option but that sideswipes the project mandate of using Terraform for building out the infrastructure.
 
 ## Solution
@@ -68,7 +68,7 @@ locals {
 When the above variables are provided (e.g. with a terraform.tfvars or terraform.auto.tfvars file), the EKS cluster with two worker groups is created:
 
 #### EKS Cluster:
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "EKS Cluster")
+![alt text](./images/EKS_Cluster.png "EKS Cluster")
 
 #### Nodes in EKS cluster:
 ```
