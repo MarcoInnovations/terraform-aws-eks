@@ -4,11 +4,11 @@
 When providing multiple workgroups manually in the locals.tf file and the needed variable values in a variable file, the terraform EKS module will build out the desired infrastructure.
 
 ## Problem
-Each worker group needs a set of specific settings and a set of mandatory defaults.  Currently the version of Terraform (v0.11.13) does not allow programatical iteration over a list or map of settings to inject the mandatory defaults into the user specified information.  Nor would we be able to verify if all needed information to build nodes is available in order to validate the build.
-Sidestepping and performing this in Python or Bash would be an option but that sideswipes the project mandate of using Terraform for building out the infrastructure.
+Each worker group needs a set of specific settings and a set of mandatory defaults.  Currently the version of Terraform (v0.11.13) does not allow programatical iteration over a variable amount of lists or maps of settings to merge the mandatory defaults with the user specified information.  Because of this restriction we also also not be able to verify if all needed information to build nodes is available, possibly resulting in failures.
+Performing this step in Python or Bash would be an option but that sideswipes the project mandate of using Terraform for building out the infrastructure.
 
 ## Solution
-Untill Terraform will provide a better way to merge lists/maps, this project will be shelved.  All necessary documentation of progress made in the POC will be provided in this branch.
+Untill Terraform will provide a better way to merge a dynamic number of lists/maps, this project will be put in the backlog.  All necessary documentation of progress made in the POC will be provided in this branch.
 
 ## Documentation
 
@@ -51,18 +51,18 @@ locals {
 
 #### User defined variables for worker group:
  * `name` - should be unique and will be used in resource names and tags.
- * `kubelet_extra_args` - is a unique tag added to the nodes and will be used for nodeaffinity to target deployments
+ * `kubelet_extra_args` - is a unique tag added to the nodes and will be used for `nodeaffinity` to target deployments
  * `asg_min_size` - autoscaling group setting: minimum amount of nodes running at any time in asg
  * `asg_max_size` - autoscaling group setting: maximum amount of nodes allowed in asg
  * `asg_desired_capacity` - autoscaling group setting: desired amount of nodes running in asg: this is the variable that is used by vertical autoscaling to run the amount of nodes to accommodate the current workload
  * `instance_type` - which type of AWS EC2 instance will be used to build the worker group (keeping in mind that the larger the instance, the more IP addresses will be reserved)
  * `key_name` - ssh-key-pair to use to access the individual nodes.  The option is offered to set different key-pairs for the wg's.
 
-#### Mandatory variables to build worker group (most likely static infromation):
+#### Mandatory variables to build worker group:
  * `pre_userdata` - information passed to the worker group nodes to allow nodes to function within the restricted VPC (proxy) setup.
  * `autoscaling_enabled`
- * `protect_from_scale_in`
- * `subnets`
+ * `protect_from_scale_in` - should be set to `no`
+ * `subnets` - 
    
 ### Result:
 When the above variables are provided (e.g. with a terraform.tfvars or terraform.auto.tfvars file), the EKS cluster with two worker groups is created:
